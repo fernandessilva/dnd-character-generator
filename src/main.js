@@ -1,5 +1,8 @@
+/* A ideia é criar um personagem aleatório sorteando os seus valores toda vez que o botão de mostrar personagem for clicado.
+ Como o personagem foi declarado dentro do evento de clique do botão, ele não pode ser acessado fora desse escopo e gerar o meu pdf. Para resolver isso, vamos declarar o personagem fora do evento de clique e atribuir o personagem gerado ao clicar no botão.
+ Após o usuário gerar o seu personagem ele pode clicar em exportar o personagem para um PDF editável.
+*/
 import './style.css'
-// import './src/index.js';
 import Personagem from "./src/models/personagem.js"
 import GeradorNome from "./src/models/GeradorNome.js"
 import GeradorAtributos from "./src/models/GeradorAtributos.js"
@@ -10,11 +13,8 @@ import equipamentos from "./src/data/equipamentos.js"
 import alinhamentos from "./src/data/alinhamentos.js"
 import { PDFDocument } from "pdf-lib"
 
-/* A ideia é criar um personagem aleatório sorteando os seus valores toda vez que o botão de mostrar personagem for clicado.
- Como o personagem foi declarado dentro do evento de clique do botão, ele não pode ser acessado fora desse escopo e gerar o meu pdf. Para resolver isso, vamos declarar o personagem fora do evento de clique e atribuir o personagem gerado ao clicar no botão.
- Após o usuário gerar o seu personagem ele pode clicar em exportar o personagem para um PDF editável.
-*/
-
+// Função para gerar um personagem aleatório
+// e preencher o PDF com os dados do personagem
 document.addEventListener("DOMContentLoaded", () => {
   let MeuPersonagem
   document.getElementById("mostrarPersonagem").addEventListener("click", () => {
@@ -86,6 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
       URL.revokeObjectURL(link.href)
     })
 })
+
+// Função para preencher o PDF com os dados do personagem
 async function preencherPDF(MeuPersonagem) {
   const response = await fetch("/ficha-de-personagem.pdf")
   if (!response.ok) {
@@ -115,6 +117,8 @@ async function preencherPDF(MeuPersonagem) {
   form.getTextField("WIS").setText(atributos.sabedoria.toString());
   form.getTextField("CHA").setText(atributos.carisma.toString());
 
+  // Campos do formulário com os equipamentos
+  form.getTextField("Equipment").setText(MeuPersonagem.equipamento.join(", "))
   return await pdfDoc.save()
 }
 
