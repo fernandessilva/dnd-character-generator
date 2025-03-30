@@ -44,8 +44,27 @@ Siga os passos abaixo para rodar o projeto localmente:
 
    http://localhost:5174/
 
-Estrutura do projeto
+## Estrutura do projeto
 
-src: Contém os arquivos principais do projeto, incluindo o código JavaScript e os estilos CSS.
-public: Contém arquivos estáticos, como o ícone dice.svg e outros recursos.
-index.html: Arquivo HTML principal que carrega o aplicativo.
+### Visão geral da estrutura de diretórios do projeto:
+
+```
+│   ├── style.css                       # Estilos CSS do projeto
+│   └── src/                            # Código Fonte
+│       ├── main.js                     # Arquivo principal JavaScript
+│       ├── data/                       # Dados mockados usados no projeto
+│       │   ├── alinhamentos.js
+│       │   ├── antecedentes.js
+│       │   ├── classes.js
+│       │   ├── equipamentos.js
+│       │   ├── habilidades.js
+│       │   ├── racas.js
+│       │   └── subracas.js
+│       └── models/                     # Modelos de classes do projeto
+│           ├── Classe.js
+│           ├── GeradorAtributos.js
+│           ├── GeradorNome.js
+│           ├── Personagem.js
+│           ├── Raca.js
+│           └── SubRaca.js
+```
