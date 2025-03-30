@@ -1,4 +1,3 @@
-// Vamos utilizar o metodo de rolagem de dados para distribuir os atributos de um personagem (Força, Destreza, Constituição, Inteligência, Sabedoria, Carisma). Esse método é conhecido como 4d6. Rolamos 4 dados de 6 lados e descartamos o dado de menor valor. Somamos os 3 dados restantes para obter o valor do atributo. Esse processo é repetido para cada atributo.
 class GeradorAtributos {
     static rolarAtributos() {
         const atributos = {}

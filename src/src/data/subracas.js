@@ -1,4 +1,4 @@
-import Subraca from "../models/Subraca.js";
+import Subraca from "../models/SubRaca.js";
 
 const subracas = {
     Anao: [

@@ -1,7 +1,3 @@
-/* A ideia é criar um personagem aleatório sorteando os seus valores toda vez que o botão de mostrar personagem for clicado.
- Como o personagem foi declarado dentro do evento de clique do botão, ele não pode ser acessado fora desse escopo e gerar o meu pdf. Para resolver isso, vamos declarar o personagem fora do evento de clique e atribuir o personagem gerado ao clicar no botão.
- Após o usuário gerar o seu personagem ele pode clicar em exportar o personagem para um PDF editável.
-*/
 import './style.css'
 import Personagem from "./src/models/Personagem.js"
 import GeradorNome from "./src/models/GeradorNome.js"
@@ -22,15 +18,21 @@ document.querySelector('#app').innerHTML = `
     <p>Após gerar o personagem, clique no botão "Baixar PDF" para baixar a ficha de personagem preenchida.</p>
     <button id="preencherPDF">Baixar PDF</button>
     </div>
-    <div id="jogo">
+  <div id="jogo"></div>    
+  <div id="sobre"></div>   
+`;
+
+const sobreDnd = `
         <h1>O que é D&D?</h1>
         <p>Dungeons & Dragons (D&D) é um jogo de RPG de mesa onde os jogadores criam personagens e embarcam em aventuras em um mundo de fantasia. O jogo é baseado em regras e dados, e é conhecido por sua narrativa colaborativa e liberdade criativa.</p>
         <p>Os jogadores assumem o papel de personagens, enquanto um jogador atua como o Dungeon Master (DM), que narra a história e controla os desafios que os jogadores enfrentam. O jogo é jogado em sessões, onde os jogadores interagem entre si e com o mundo ao seu redor, tomando decisões que afetam a narrativa.</p>
         <p>D&D é conhecido por sua rica lore, sistemas de combate e magia, e pela possibilidade de personalizar personagens com diferentes raças, classes e habilidades. O jogo tem uma base de fãs dedicada e é frequentemente jogado em grupos, tanto presencialmente quanto online.</p>
         <p>O jogo é jogado com dados, sendo o mais comum o dado de 20 lados (d20), que é usado para determinar o sucesso ou falha de ações dos personagens. Os jogadores também podem usar miniaturas e mapas para representar os personagens e o ambiente durante as sessões.</p>
         <p>D&D é um jogo que promove a criatividade, o trabalho em equipe e a resolução de problemas, e é uma experiência única e envolvente para os jogadores.</p>
-    </div>
-  <div id="sobre">
+        `
+document.querySelector('#jogo').innerHTML = sobreDnd
+
+const sobre = `
     <h1>Sobre</h1>
     <ol>
       <li>O gerador de personagens é uma ferramenta útil para jogadores que desejam criar personagens rapidamente e sem complicações.</li>
@@ -43,8 +45,9 @@ document.querySelector('#app').innerHTML = `
       </ul>
       </li>
     </ol>
-  </div>
-`;
+    `
+document.querySelector('#sobre').innerHTML = sobre
+
 // Função para gerar um personagem aleatório e preencher o PDF com os dados do personagem
 document.addEventListener("DOMContentLoaded", () => {
   let MeuPersonagem
@@ -121,8 +124,8 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 async function preencherPDF(MeuPersonagem) {
-  // const response = await fetch("/dnd-character-generator/ficha-de-personagem.pdf")
-  const response = await fetch("/ficha-de-personagem.pdf")
+  const response = await fetch("/dnd-character-generator/ficha-de-personagem.pdf")
+  // const response = await fetch("/ficha-de-personagem.pdf")
   if (!response.ok) {
     throw new Error(`Erro ao carregar o PDF: ${response.statusText}`)
   }

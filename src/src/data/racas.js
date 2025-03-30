@@ -1,4 +1,4 @@
-import Raca from "../models/raca.js";
+import Raca from "../models/Raca.js";
 import subracas from "./subracas.js";
 
 const racas = [

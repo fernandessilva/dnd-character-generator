@@ -1,6 +1,3 @@
-/* Os nomes sao específicos para cada raça, então o método gerarNome recebe um objeto raça e retorna um nome aleatório para a raça passada como argumento.
-O método gerarNome é um método estático da classe GeradorNome, então não é necessário instanciar um objeto dessa classe para utilizá-lo.
-*/
 class GeradorNome {
     static gerarNome(raca) {
         const nomes = {
