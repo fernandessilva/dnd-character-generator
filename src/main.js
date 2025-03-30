@@ -22,7 +22,7 @@ document.querySelector('#app').innerHTML = `
     <p>Após gerar o personagem, clique no botão "Baixar PDF" para baixar a ficha de personagem preenchida.</p>
     <button id="preencherPDF">Baixar PDF</button>
     </div>
-    <div id="O que é D&D?">
+    <div id="jogo">
         <h1>O que é D&D?</h1>
         <p>Dungeons & Dragons (D&D) é um jogo de RPG de mesa onde os jogadores criam personagens e embarcam em aventuras em um mundo de fantasia. O jogo é baseado em regras e dados, e é conhecido por sua narrativa colaborativa e liberdade criativa.</p>
         <p>Os jogadores assumem o papel de personagens, enquanto um jogador atua como o Dungeon Master (DM), que narra a história e controla os desafios que os jogadores enfrentam. O jogo é jogado em sessões, onde os jogadores interagem entre si e com o mundo ao seu redor, tomando decisões que afetam a narrativa.</p>
