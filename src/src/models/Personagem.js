@@ -8,6 +8,7 @@ equipamento é o equipamento inicial do personagem de acordo com a sua classe e 
 O método aplicarModificadores é responsável pelos modificadres de cada raça, subraça e antecedente. Por exemplo, um anão da montanha tem +2 de constituição e +2 de força, enquanto um anão da colina tem +2 de constituição e +1 de sabedoria.
 Os modificadores não sao somados aos valores dos atributos gerados aleatoriamente, mas são usados para serem exibidos e usados separadamente durante o jogo.
 */
+import habilidades from "../data/habilidades.js";
 class Personagem {
     constructor(raca, subraca, nome, classe, antecedente, alinhamento, atributos, equipamento) {
         this.raca = raca;
@@ -18,26 +19,41 @@ class Personagem {
         this.alinhamento = alinhamento;
         this.atributos = atributos;
         this.equipamento = equipamento;
-        this.modificadores = [];
-        this.aplicarModificadores();
+        this.habilidades = [];
+        this.definirHabilidades();
+    }
+    // Adicione este método à classe Personagem em Personagem.js
+    calcularModificador(valor) {
+        return Math.floor((valor - 10) / 2);
     }
 
-    aplicarModificadores() {
+    exibirModificadores() {
+        const mods = {};
+        for (const [atributo, valor] of Object.entries(this.atributos)) {
+            mods[atributo] = this.calcularModificador(valor);
+        }
+        return Object.entries(mods)
+            .map(([atributo, valor]) => `${atributo.charAt(0).toUpperCase() + atributo.slice(1)}: ${valor >= 0 ? '+' + valor : valor}`)
+            .join(', ');
+    }
 
-        this.raca.modificadores.forEach(mod => {
-            this.modificadores.push({ atributo: mod.atributo, value: mod.value, origem: 'Raça' });
-        });
+    exibirAtributos() {
+        return Object.entries(this.atributos)
+            .map(([atributo, valor]) => `${atributo.charAt(0).toUpperCase() + atributo.slice(1)}: ${valor}`)
+            .join(', ');
+    }
 
-        if (this.subraca?.modificadores.length) {
-            this.subraca.modificadores.forEach(mod => {
-                this.modificadores.push({ atributo: mod.atributo, value: mod.value, origem: 'Subraça' });
-            });
+    definirHabilidades() {
+        if (habilidades.racas[this.raca.nome]) {
+            this.habilidades.push(...habilidades.racas[this.raca.nome]);
+        }
+
+        if (habilidades.classes[this.classe.nome]) {
+            this.habilidades.push(...habilidades.classes[this.classe.nome]);
         }
     }
-    exibirModificadores() {
-        return this.modificadores.map(mod =>
-            `${mod.origem} - ${mod.atributo}: +${mod.value}`
-        ).join(', ');
+    exibirHabilidades() {
+        return this.habilidades.join('\n');
     }
 }
 export default Personagem;
