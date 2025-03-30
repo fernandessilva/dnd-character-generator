@@ -121,6 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 async function preencherPDF(MeuPersonagem) {
+  // const response = await fetch("/dnd-character-generator/ficha-de-personagem.pdf")
   const response = await fetch("/ficha-de-personagem.pdf")
   if (!response.ok) {
     throw new Error(`Erro ao carregar o PDF: ${response.statusText}`)
