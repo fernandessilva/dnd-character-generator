@@ -83,15 +83,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const personagemInfo = `
     <div class="personagem-card">
-      <h2>${MeuPersonagem.nome}</h2>
-      <p><strong>Raça:</strong> ${MeuPersonagem.subraca ? `${MeuPersonagem.raca.nome} (${MeuPersonagem.subraca.nome})` : MeuPersonagem.raca.nome}</p>
-      <p><strong>Classe:</strong> ${MeuPersonagem.classe.nome}</p>
-      <p><strong>Antecedente:</strong> ${MeuPersonagem.antecedente || "Nenhum"}</p>
-      <p><strong>Alinhamento:</strong> ${MeuPersonagem.alinhamento}</p>
-      <p><strong>Atributos:</strong> ${MeuPersonagem.exibirAtributos()}</p>
-      <p><strong>Modificadores:</strong> ${MeuPersonagem.exibirModificadores()}</p>
-      <p><strong>Habilidades:</strong> ${MeuPersonagem.exibirHabilidades()}</p>
-      <p><strong>Equipamentos:</strong> ${MeuPersonagem.equipamento.join(", ")}</p>
+      <h2><span class="personagemField">${MeuPersonagem.nome}</h2>
+      <p><span class="personagemField">Raça: </span>${MeuPersonagem.subraca ? `${MeuPersonagem.raca.nome} (${MeuPersonagem.subraca.nome})` : MeuPersonagem.raca.nome}<span></p>
+      <p><span class="personagemField">Classe: </span>${MeuPersonagem.classe.nome}</p>
+      <p><span class="personagemField">Antecedente: </span>${MeuPersonagem.antecedente || "Nenhum"}</p>
+      <p><span class="personagemField">Alinhamento: </span>${MeuPersonagem.alinhamento}</p>
+      <p><span class="personagemField">Atributos: </span>${MeuPersonagem.exibirAtributos()}</p>
+      <p><span class="personagemField">Modificadores: </span>${MeuPersonagem.exibirModificadores()}</p>
+      <p><span class="personagemField">Habilidades: </span>${MeuPersonagem.exibirHabilidades()}</p>
+      <p><span class="personagemField">Equipamentos: </span>${MeuPersonagem.equipamento.join(", ")}</p>
     </div>
   `;
     document.getElementById("personagemInfo").innerHTML = personagemInfo;

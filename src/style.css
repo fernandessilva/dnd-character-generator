@@ -8,6 +8,7 @@
   font-family: 'ScalaSans-Bold';
   src: url('../fonts/ScalaSansOffc-Bold_1wk.woff') format('woff'),
        url('../fonts/ScalaSansOffc-Bold_9u.woff') format('woff');
+  font-weight: bold;
 }
 
 @font-face {
@@ -143,4 +144,9 @@ button:focus-visible {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+}
+
+.personagemField{
+  font-family: 'ScalaSans-Bold';
+  font-weight: bold !important;
 }
