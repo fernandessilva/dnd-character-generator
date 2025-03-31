@@ -48,7 +48,7 @@ const sobre = `
     `
 document.querySelector('#sobre').innerHTML = sobre
 
-// Função para gerar um personagem aleatório e preencher o PDF com os dados do personagem
+// gerar um personagem aleatorio e depois preencher o pdf
 document.addEventListener("DOMContentLoaded", () => {
   let MeuPersonagem
   document.getElementById("mostrarPersonagem").addEventListener("click", () => {
@@ -134,7 +134,7 @@ async function preencherPDF(MeuPersonagem) {
 
   const form = pdfDoc.getForm()
 
-  // Campos do formulário com os dados do personagem
+  // campos de personagem
   form.getTextField("CharacterName").setText(MeuPersonagem.nome)
   form.getTextField("Race ").setText(MeuPersonagem.subraca
     ? `${MeuPersonagem.raca.nome}(${MeuPersonagem.subraca.nome})`
@@ -148,7 +148,7 @@ async function preencherPDF(MeuPersonagem) {
   featuresField.setText(MeuPersonagem.exibirHabilidades())
   featuresField.setFontSize(10)
 
-  // Campos do formulário com os atributos e modificadores
+  // campos de atributos e modificadores
   const atributos = MeuPersonagem.atributos
   form.getTextField("STR").setText(atributos.forca.toString())
   form.getTextField("DEX").setText(atributos.destreza.toString())
@@ -175,7 +175,7 @@ async function preencherPDF(MeuPersonagem) {
     `+${MeuPersonagem.calcularModificador(atributos.carisma)}` :
     MeuPersonagem.calcularModificador(atributos.carisma).toString());
 
-  // Campos do formulário com os equipamentos
+  // campo dos equipamentos
   const equipamentosField = form.getTextField("Equipment")
   equipamentosField.setText(MeuPersonagem.equipamento.join("\n"))
   equipamentosField.setFontSize(10)

@@ -11,14 +11,7 @@ class GeradorNome {
             MeioOrc: ["Dench", "Feng", "Gell", "Henk", "Holg", "Imsh", "Keth", "Krusk", "Mhurren", "Ront", "Shump", "Thokk"],
             Tiefling: ["Akmenos", "Amnon", "Barakas", "Damakos", "Ekemon", "Iados", "Kairon", "Leucis", "Melech", "Mordai", "Morthos", "Pelaios", "Skamos", "Therai"]
         }
-
         const nomesRaca = nomes[raca.nome];
-
-        if (!nomesRaca || nomesRaca.length === 0) {
-            console.error(`Erro: Nenhuma lista de nomes encontrada para a raça "${raca.nome}"`);
-            return "Nome Desconhecido";
-        }
-
         return nomesRaca[Math.floor(Math.random() * nomesRaca.length)];
     }
 }
