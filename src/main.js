@@ -22,18 +22,17 @@ document.querySelector('#app').innerHTML = `
   <div id="sobre"></div>   
 `;
 
-const sobreDnd = `
-        <h1>O que é D&D?</h1>
+document.querySelector('#jogo').innerHTML = `
+        <h2>O que é D&D?</h2>
         <p>Dungeons & Dragons (D&D) é um jogo de RPG de mesa onde os jogadores criam personagens e embarcam em aventuras em um mundo de fantasia. O jogo é baseado em regras e dados, e é conhecido por sua narrativa colaborativa e liberdade criativa.</p>
         <p>Os jogadores assumem o papel de personagens, enquanto um jogador atua como o Dungeon Master (DM), que narra a história e controla os desafios que os jogadores enfrentam. O jogo é jogado em sessões, onde os jogadores interagem entre si e com o mundo ao seu redor, tomando decisões que afetam a narrativa.</p>
         <p>D&D é conhecido por sua rica lore, sistemas de combate e magia, e pela possibilidade de personalizar personagens com diferentes raças, classes e habilidades. O jogo tem uma base de fãs dedicada e é frequentemente jogado em grupos, tanto presencialmente quanto online.</p>
         <p>O jogo é jogado com dados, sendo o mais comum o dado de 20 lados (d20), que é usado para determinar o sucesso ou falha de ações dos personagens. Os jogadores também podem usar miniaturas e mapas para representar os personagens e o ambiente durante as sessões.</p>
         <p>D&D é um jogo que promove a criatividade, o trabalho em equipe e a resolução de problemas, e é uma experiência única e envolvente para os jogadores.</p>
         `
-document.querySelector('#jogo').innerHTML = sobreDnd
 
-const sobre = `
-    <h1>Sobre</h1>
+document.querySelector('#sobre').innerHTML = `
+    <h2>Sobre</h2>
     <ol>
       <li>O gerador de personagens é uma ferramenta útil para jogadores que desejam criar personagens rapidamente e sem complicações.</li>
       <li>Ajudar o Dungeon Master a criar NPCs ou Personagens rápidos para os jogadores.</li>
@@ -46,9 +45,7 @@ const sobre = `
       </li>
     </ol>
     `
-document.querySelector('#sobre').innerHTML = sobre
 
-// gerar um personagem aleatorio e depois preencher o pdf
 document.addEventListener("DOMContentLoaded", () => {
   let MeuPersonagem
   document.getElementById("mostrarPersonagem").addEventListener("click", () => {
@@ -86,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const personagemInfo = `
     <div class="personagem-card">
-      <h2><span class="personagemField">${MeuPersonagem.nome}</h2>
+      <h3><span class="personagemField">${MeuPersonagem.nome}</h3>
       <p><span class="personagemField">Raça: </span>${MeuPersonagem.subraca ? `${MeuPersonagem.raca.nome} (${MeuPersonagem.subraca.nome})` : MeuPersonagem.raca.nome}<span></p>
       <p><span class="personagemField">Classe: </span>${MeuPersonagem.classe.nome}</p>
       <p><span class="personagemField">Antecedente: </span>${MeuPersonagem.antecedente || "Nenhum"}</p>
@@ -124,6 +121,11 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 async function preencherPDF(MeuPersonagem) {
+  function formatarModificador(valor) {
+    const mod = MeuPersonagem.calcularModificador(valor);
+    return mod >= 0 ? `+${mod}` : mod.toString();
+  }
+
   const response = await fetch("/dnd-character-generator/ficha-de-personagem.pdf")
   // const response = await fetch("/ficha-de-personagem.pdf")
   if (!response.ok) {
@@ -156,24 +158,12 @@ async function preencherPDF(MeuPersonagem) {
   form.getTextField("INT").setText(atributos.inteligencia.toString())
   form.getTextField("WIS").setText(atributos.sabedoria.toString())
   form.getTextField("CHA").setText(atributos.carisma.toString())
-  form.getTextField("STRmod").setText(MeuPersonagem.calcularModificador(atributos.forca) >= 0 ?
-    `+${MeuPersonagem.calcularModificador(atributos.forca)}` :
-    MeuPersonagem.calcularModificador(atributos.forca).toString());
-  form.getTextField("DEXmod ").setText(MeuPersonagem.calcularModificador(atributos.destreza) >= 0 ?
-    `+${MeuPersonagem.calcularModificador(atributos.destreza)}` :
-    MeuPersonagem.calcularModificador(atributos.destreza).toString());
-  form.getTextField("CONmod").setText(MeuPersonagem.calcularModificador(atributos.constituicao) >= 0 ?
-    `+${MeuPersonagem.calcularModificador(atributos.constituicao)}` :
-    MeuPersonagem.calcularModificador(atributos.constituicao).toString());
-  form.getTextField("INTmod").setText(MeuPersonagem.calcularModificador(atributos.inteligencia) >= 0 ?
-    `+${MeuPersonagem.calcularModificador(atributos.inteligencia)}` :
-    MeuPersonagem.calcularModificador(atributos.inteligencia).toString());
-  form.getTextField("WISmod").setText(MeuPersonagem.calcularModificador(atributos.sabedoria) >= 0 ?
-    `+${MeuPersonagem.calcularModificador(atributos.sabedoria)}` :
-    MeuPersonagem.calcularModificador(atributos.sabedoria).toString());
-  form.getTextField("CHamod").setText(MeuPersonagem.calcularModificador(atributos.carisma) >= 0 ?
-    `+${MeuPersonagem.calcularModificador(atributos.carisma)}` :
-    MeuPersonagem.calcularModificador(atributos.carisma).toString());
+  form.getTextField("STRmod").setText(formatarModificador(atributos.forca))
+  form.getTextField("DEXmod ").setText(formatarModificador(atributos.destreza))
+  form.getTextField("CONmod").setText(formatarModificador(atributos.constituicao))
+  form.getTextField("INTmod").setText(formatarModificador(atributos.inteligencia))
+  form.getTextField("WISmod").setText(formatarModificador(atributos.sabedoria))
+  form.getTextField("CHamod").setText(formatarModificador(atributos.carisma))
 
   // campo dos equipamentos
   const equipamentosField = form.getTextField("Equipment")

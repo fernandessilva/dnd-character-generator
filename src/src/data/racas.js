@@ -71,3 +71,4 @@ const racas = [
         ["Comum", "Infernal"])
 ];
 export default racas;
+// teste
